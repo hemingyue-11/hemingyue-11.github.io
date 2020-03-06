@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Colab读取Google云盘里的文件</title>
+      <link href="/2020/03/06/wq/"/>
+      <url>/2020/03/06/wq/</url>
+      
+        <content type="html"><![CDATA[<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os<span class="token keyword">from</span> google<span class="token punctuation">.</span>colab <span class="token keyword">import</span> drivedrive<span class="token punctuation">.</span>mount<span class="token punctuation">(</span><span class="token string">'/content/drive'</span><span class="token punctuation">)</span>path <span class="token operator">=</span> <span class="token string">"/content/drive/My Drive"</span>os<span class="token punctuation">.</span>chdir<span class="token punctuation">(</span>path<span class="token punctuation">)</span>os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span>path<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Colab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Matlab常用语法</title>
       <link href="/2020/03/06/Matlab%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/"/>
       <url>/2020/03/06/Matlab%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
