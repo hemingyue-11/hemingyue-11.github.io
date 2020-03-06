@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Matlab常用语法</title>
+      <link href="/2020/03/06/Matlab%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/"/>
+      <url>/2020/03/06/Matlab%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="结构体的使用"><a href="#结构体的使用" class="headerlink" title="结构体的使用"></a>结构体的使用</h2><h3 id="创建结构体"><a href="#创建结构体" class="headerlink" title="创建结构体"></a>创建结构体</h3><p>直接创建结构体数组，下面创建一个结构体数组</p><pre class="line-numbers language-python"><code class="language-python">Student<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Gaoting'</span><span class="token punctuation">;</span>Student<span class="token punctuation">.</span>sex <span class="token operator">=</span> <span class="token string">'Femail'</span><span class="token punctuation">;</span>Student<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token string">'150'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="扩充结构体变量"><a href="#扩充结构体变量" class="headerlink" title="扩充结构体变量"></a>扩充结构体变量</h3><pre class="line-numbers language-python"><code class="language-python">Student<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Hemingyue'</span><span class="token punctuation">;</span>Student<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sex <span class="token operator">=</span> <span class="token string">'Male'</span><span class="token punctuation">;</span>Student<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token number">174</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="访问结构体"><a href="#访问结构体" class="headerlink" title="访问结构体"></a>访问结构体</h3><pre class="line-numbers language-python"><code class="language-python">Student<span class="token punctuation">.</span>name<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="将结构体变量转化成数组"><a href="#将结构体变量转化成数组" class="headerlink" title="将结构体变量转化成数组"></a>将结构体变量转化成数组</h3><pre class="line-numbers language-python"><code class="language-python">cell2mat<span class="token punctuation">(</span>struct2cell<span class="token punctuation">(</span>load<span class="token punctuation">(</span><span class="token string">'结构体变量'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="高维数组的转置"><a href="#高维数组的转置" class="headerlink" title="高维数组的转置"></a>高维数组的转置</h3><p>假设A的维度为[1,2,3]</p><pre class="line-numbers language-python"><code class="language-python">B <span class="token operator">=</span> permute<span class="token punctuation">(</span>A<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>B的维度为[2,3,1],即第一个维度和第三个维度调换</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> matlab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>使用seaborn数据可视化的几种方法</title>
       <link href="/2020/03/05/%E4%BD%BF%E7%94%A8seaborn%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
       <url>/2020/03/05/%E4%BD%BF%E7%94%A8seaborn%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
@@ -20,7 +45,11 @@
       
         <tags>
             
-            <tag> -Python -seaborn -数据处理 </tag>
+            <tag> Python </tag>
+            
+            <tag> seaborn </tag>
+            
+            <tag> 数据处理 </tag>
             
         </tags>
       

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: 编程, Infinity">
-    <meta name="description" content="分类: 编程 | Infinity">
+    <meta name="keywords" content="标签: Python, Infinity">
+    <meta name="description" content="标签: Python | Infinity">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>分类: 编程 | Infinity</title>
+    <title>标签: Python | Infinity</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -269,24 +269,49 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
     
 
-<div id="category-cloud" class="container chip-container">
+<div id="tags" class="container chip-container">
     <div class="card">
         <div class="card-content">
             <div class="tag-title center-align">
-                <i class="fa fa-bookmark"></i>&nbsp;&nbsp;文章分类
+                <i class="fa fa-tags"></i>&nbsp;&nbsp;文章标签
             </div>
             <div class="tag-chips">
                 
                 
-                
-                <a href="/categories/%E7%BC%96%E7%A8%8B/" title="编程: 2">
+                <a href="/tags/matlab/" title="matlab: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F9EBEA;">编程
-                        <span class="tag-length">2</span>
+                             chip-default "
+                            data-tagname="matlab" style="background-color: #F9EBEA;">matlab
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
+                
+                <a href="/tags/Python/" title="Python: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            data-tagname="Python" style="background-color: #F5EEF8;">Python
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/seaborn/" title="seaborn: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="seaborn" style="background-color: #D5F5E3;">seaborn
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" title="数据处理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="数据处理" style="background-color: #E8F8F5;">数据处理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
                 
             </div>
         </div>
@@ -298,55 +323,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
     <article id="articles" class="container articles">
         <div class="row tags-posts">
             
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/03/06/Matlab%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Matlab常用语法">
-                            
-                            <span class="card-title">Matlab常用语法</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary">
-                            
-                                结构体的使用创建结构体直接创建结构体数组，下面创建一个结构体数组
-Student.name = 'Gaoting';
-Student.sex
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%BC%96%E7%A8%8B/" class="post-category" target="_blank">
-                                    编程
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/matlab/" target="_blank">
-                            <span class="chip bg-color">matlab</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
             
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+            <div class="article tag-post col s12 m6 l4" data-tags="Python, seaborn, 数据处理" data-aos="fade-up">
                 <div class="card">
                     <a href="/2020/03/05/%E4%BD%BF%E7%94%A8seaborn%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/">
                         <div class="card-image tag-image">
@@ -358,11 +336,6 @@ Student.sex
                         </div>
                     </a>
                     <div class="card-content article-content">
-                        <div class="summary">
-                            
-                                介绍seaborn是一个非常适合初学者的python库，仅需几行代码就可以实现数据的可视化，有丰富的图类型可以使用，下面我将介绍基中用处非常
-                            
-                        </div>
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-05
@@ -372,31 +345,13 @@ Student.sex
                                 <i class="fa fa-bookmark fa-fw icon-category"></i>
                                 
                                 <a href="/categories/%E7%BC%96%E7%A8%8B/" class="post-category" target="_blank">
-                                    编程
+                                编程
                                 </a>
                                 
                                 
                             </span>
                         </div>
                     </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Python/" target="_blank">
-                            <span class="chip bg-color">Python</span>
-                        </a>
-                        
-                        <a href="/tags/seaborn/" target="_blank">
-                            <span class="chip bg-color">seaborn</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" target="_blank">
-                            <span class="chip bg-color">数据处理</span>
-                        </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
             
