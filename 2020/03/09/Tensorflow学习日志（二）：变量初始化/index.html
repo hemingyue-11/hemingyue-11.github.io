@@ -4,8 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="contact, Infinity">
-    <meta name="description" content="contact | Infinity">
+    <meta name="keywords" content="Tensorflow学习日志（二）：变量初始化, Infinity">
+    <meta name="description" content="介绍接下来我们会介绍如何创建和初始化TensorFlow变量
+创建变量import tensorflow
+from tensorflow.python.framework import ops
+
+#创建三个变量
+weights = tf.V">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>contact | Infinity</title>
+    <title>Tensorflow学习日志（二）：变量初始化 | Infinity</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -243,13 +248,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        contact
+                        Tensorflow学习日志（二）：变量初始化
                     </div>
                 </div>
             </div>
@@ -339,12 +344,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Tensorflow/" target="_blank">
+                                <span class="chip bg-color">Tensorflow</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" target="_blank">
+                                机器学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -352,14 +370,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-03-09
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        228
                     </div>
                     
 
@@ -377,7 +395,32 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>接下来我们会介绍如何创建和初始化TensorFlow变量</p>
+<h2 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> tensorflow
+<span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>python<span class="token punctuation">.</span>framework <span class="token keyword">import</span> ops
+
+<span class="token comment" spellcheck="true">#创建三个变量</span>
+weights <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>random_normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>stddev<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token operator">=</span><span class="token string">"weights"</span><span class="token punctuation">)</span>
+biases <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token operator">=</span><span class="token string">"biases"</span><span class="token punctuation">)</span>
+custom_variable <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token operator">=</span><span class="token string">"custom"</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">#把所有变量的存储在列表中</span>
+all_variables_list <span class="token operator">=</span> ops<span class="token punctuation">.</span>get_collection<span class="token punctuation">(</span>ops<span class="token punctuation">.</span>GraphKeys<span class="token punctuation">.</span>GLOBAL_VARIABLES<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>在模型进行操作之前必须要初始化变量</p>
+<h3 id="初始化特定的变量"><a href="#初始化特定的变量" class="headerlink" title="初始化特定的变量"></a>初始化特定的变量</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#初始化特定的变量，把想要初始的变量存在variable_list_custom中</span>
+variable_list_custom <span class="token operator">=</span> <span class="token punctuation">[</span>weights<span class="token punctuation">,</span> custom_variable<span class="token punctuation">]</span>
+<span class="token comment" spellcheck="true">#初始化</span>
+init_custom_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>variables_initializer<span class="token punctuation">(</span>var_list<span class="token operator">=</span>variable_list_custom<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="全局初始化变量"><a href="#全局初始化变量" class="headerlink" title="全局初始化变量"></a>全局初始化变量</h3><pre class="line-numbers language-python"><code class="language-python">init_all_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>variables_initializer<span class="token punctuation">(</span>var_list<span class="token operator">=</span>all_variables_list<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="继承其它变量的初始化"><a href="#继承其它变量的初始化" class="headerlink" title="继承其它变量的初始化"></a>继承其它变量的初始化</h3><pre class="line-numbers language-python"><code class="language-python">WeightsNew <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>weights<span class="token punctuation">.</span>initialized_value<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"WeightsNew"</span><span class="token punctuation">)</span>
+init_WeightsNew_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>variables_initializer<span class="token punctuation">(</span>var_list<span class="token operator">=</span><span class="token punctuation">[</span>WeightsNew<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>##运行Session</p>
+<p>前面的操作只是把初始化的操作放到了计算图里，真正的初始化要在Session中运行</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
+    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_all_op<span class="token punctuation">)</span>
+    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_custom_op<span class="token punctuation">)</span>
+    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_WeightsNew_op<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
             </div>
             <hr/>
 
@@ -524,7 +567,7 @@
                     </span>
                     <a href="http://yoursite.com" class="b-link-green">Infinity</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/contact/index.html" class="b-link-green">contact</a>
+                    <a href="/2020/03/09/Tensorflow%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/" class="b-link-green">Tensorflow学习日志（二）：变量初始化</a>
                 </p>
             </div>
         </div>
@@ -550,30 +593,47 @@
                 <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/contact/index.html">
+                <a href="/2020/03/09/Tensorflow%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Tensorflow学习日志（二）：变量初始化">
                         
-                        <span class="card-title">contact</span>
+                        <span class="card-title">Tensorflow学习日志（二）：变量初始化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">介绍接下来我们会介绍如何创建和初始化TensorFlow变量
+创建变量import tensorflow
+from tensorflow.python.framework import ops
+
+#创建三个变量
+weights = tf.V</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-05
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-09
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            何明月
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" target="_blank">
+                                    机器学习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Tensorflow/" target="_blank">
+                        <span class="chip bg-color">Tensorflow</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -581,33 +641,44 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/contact/index.html">
+                <a href="/2020/03/09/Tensorflow%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ASession%E5%92%8CTensorBoard%E5%8F%AF%E8%A7%86%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Tensorflow学习日志（一）：Session和TensorBoard可视化">
                         
-                        <span class="card-title">contact</span>
+                        <span class="card-title">Tensorflow学习日志（一）：Session和TensorBoard可视化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行，下面将介绍如何在TensorFlow里面创建计算图，运行计</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-05
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-09
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            何明月
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" target="_blank">
+                                    机器学习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/TensorFlow/" target="_blank">
+                        <span class="chip bg-color">TensorFlow</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
