@@ -4,13 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Tensorflow学习日志（二）：变量初始化, Infinity">
-    <meta name="description" content="介绍接下来我们会介绍如何创建和初始化TensorFlow变量
-创建变量import tensorflow
-from tensorflow.python.framework import ops
-
-#创建三个变量
-weights = tf.V">
+    <meta name="keywords" content="Tensorflow2.0 学习日志（二）：进阶操作, Infinity">
+    <meta name="description" content="合并合并操作为把两个张良的数据合并为一个张量，有两种操作可以合并，拼接和堆叠，拼接不改变张量的维度，在某一个维度上合并两个张量，堆叠会创建一个新的维度来保存数据。
+拼接在 TensorFlow 中，可以通过 tf.concat(tensor">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +14,7 @@ weights = tf.V">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Tensorflow学习日志（二）：变量初始化 | Infinity</title>
+    <title>Tensorflow2.0 学习日志（二）：进阶操作 | Infinity</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -248,13 +244,13 @@ weights = tf.V">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Tensorflow学习日志（二）：变量初始化
+                        Tensorflow2.0 学习日志（二）：进阶操作
                     </div>
                 </div>
             </div>
@@ -370,21 +366,21 @@ weights = tf.V">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-09
+                    2020-03-11
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        228
+                        628
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        2 分
                     </div>
                     
                 
@@ -395,31 +391,27 @@ weights = tf.V">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>接下来我们会介绍如何创建和初始化TensorFlow变量</p>
-<h2 id="创建变量"><a href="#创建变量" class="headerlink" title="创建变量"></a>创建变量</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> tensorflow
-<span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>python<span class="token punctuation">.</span>framework <span class="token keyword">import</span> ops
-
-<span class="token comment" spellcheck="true">#创建三个变量</span>
-weights <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>random_normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>stddev<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token operator">=</span><span class="token string">"weights"</span><span class="token punctuation">)</span>
-biases <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token operator">=</span><span class="token string">"biases"</span><span class="token punctuation">)</span>
-custom_variable <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>name<span class="token operator">=</span><span class="token string">"custom"</span><span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true">#把所有变量的存储在列表中</span>
-all_variables_list <span class="token operator">=</span> ops<span class="token punctuation">.</span>get_collection<span class="token punctuation">(</span>ops<span class="token punctuation">.</span>GraphKeys<span class="token punctuation">.</span>GLOBAL_VARIABLES<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>在模型进行操作之前必须要初始化变量</p>
-<h3 id="初始化特定的变量"><a href="#初始化特定的变量" class="headerlink" title="初始化特定的变量"></a>初始化特定的变量</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#初始化特定的变量，把想要初始的变量存在variable_list_custom中</span>
-variable_list_custom <span class="token operator">=</span> <span class="token punctuation">[</span>weights<span class="token punctuation">,</span> custom_variable<span class="token punctuation">]</span>
-<span class="token comment" spellcheck="true">#初始化</span>
-init_custom_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>variables_initializer<span class="token punctuation">(</span>var_list<span class="token operator">=</span>variable_list_custom<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="全局初始化变量"><a href="#全局初始化变量" class="headerlink" title="全局初始化变量"></a>全局初始化变量</h3><pre class="line-numbers language-python"><code class="language-python">init_all_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>variables_initializer<span class="token punctuation">(</span>var_list<span class="token operator">=</span>all_variables_list<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="继承其它变量的初始化"><a href="#继承其它变量的初始化" class="headerlink" title="继承其它变量的初始化"></a>继承其它变量的初始化</h3><pre class="line-numbers language-python"><code class="language-python">WeightsNew <span class="token operator">=</span> tf<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>weights<span class="token punctuation">.</span>initialized_value<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"WeightsNew"</span><span class="token punctuation">)</span>
-init_WeightsNew_op <span class="token operator">=</span> tf<span class="token punctuation">.</span>variables_initializer<span class="token punctuation">(</span>var_list<span class="token operator">=</span><span class="token punctuation">[</span>WeightsNew<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>##运行Session</p>
-<p>前面的操作只是把初始化的操作放到了计算图里，真正的初始化要在Session中运行</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> tf<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> sess<span class="token punctuation">:</span>
-    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_all_op<span class="token punctuation">)</span>
-    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_custom_op<span class="token punctuation">)</span>
-    sess<span class="token punctuation">.</span>run<span class="token punctuation">(</span>init_WeightsNew_op<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><p>合并操作为把两个张良的数据合并为一个张量，有两种操作可以合并，拼接和堆叠，拼接不改变张量的维度，在某一个维度上合并两个张量，堆叠会创建一个新的维度来保存数据。</p>
+<h3 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h3><p>在 TensorFlow 中，可以通过 tf.concat(tensors, axis)函数拼接张量，其中参数 tensors 保存了所有需要合并的张量 List，axis 参数指定需要合并的维度索引。回到上面的 例子，我们在班级维度上合并成绩册，这<br>里班级维度索引号为 0，即 axis=0，合并张量𝑨和 𝑩的代码如下：</p>
+<pre class="line-numbers language-python"><code class="language-python">a <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 模拟成绩册 A</span>
+b <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 模拟成绩册 B</span>
+tf<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span>b<span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 拼接合并成绩册</span>
+Out<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">13</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">35</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>float32<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="堆叠"><a href="#堆叠" class="headerlink" title="堆叠"></a>堆叠</h3><p>拼接操作直接在现有维度上合并数据，并不会创建新的维度。如果在合并数据 时，希望创建一个新的维度，则需要使用 tf.stack 操作。考虑张量𝑨保存了某个班级的成绩 册，shape 为[35,8]，张量𝑩保存了另一个班级&gt;的成绩册，shape 为[35,8]。合并这 2 个班级 的数据时，则需要创建一个新维度，定义为班级维度，新维度可以选择放置在任意位置， 一般根据大小维度的经验法则，将较大概念的班级维度放置在学生维度之前，则合<br>并后的 张量的新 shape 应为[2,35,8]。</p>
+<pre class="line-numbers language-python"><code class="language-python">a <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tf<span class="token punctuation">.</span>stack<span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span>b<span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 堆叠合并为 2 个班级，班级维度插入在最前</span>
+Out<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">55</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">35</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>float32<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h2><p>合并操作的逆过程就是分割，将一个张量分拆为多个张量。<br>通过tf.split(x,num_or_size_splits,axis)可以完成张量的分割操作。<br> x 参数：待分割张量。<br> num_or_size_splits 参数：切割方案。当 num_or_size_splits 为单个数值时，如 10，表 示等长切割为 10 份；当 num_or_size_splits 为 List 时，List 的每个元素表示每份的长 度，如[2,4,2,2]表示切割为 4 &gt;份，每份的长度依次是 2、4、2、2。<br> axis 参数：指定分割的维度索引号。</p>
+<pre class="line-numbers language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+x <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 等长切割为 10 份</span>
+result <span class="token operator">=</span> tf<span class="token punctuation">.</span>split<span class="token punctuation">(</span>x<span class="token punctuation">,</span> num_or_size_splits<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+len<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 返回的列表为 10 个张量的列表</span>
+Out<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -567,7 +559,7 @@ init_WeightsNew_op <span class="token operator">=</span> tf<span class="token pu
                     </span>
                     <a href="http://yoursite.com" class="b-link-green">Infinity</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2020/03/09/Tensorflow%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/" class="b-link-green">Tensorflow学习日志（二）：变量初始化</a>
+                    <a href="/2020/03/11/Tensorflow2-0-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C/" class="b-link-green">Tensorflow2.0 学习日志（二）：进阶操作</a>
                 </p>
             </div>
         </div>
@@ -593,25 +585,21 @@ init_WeightsNew_op <span class="token operator">=</span> tf<span class="token pu
                 <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/03/09/Tensorflow%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                <a href="/2020/03/11/Tensorflow2-0-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Tensorflow学习日志（二）：变量初始化">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Tensorflow2.0 学习日志（二）：进阶操作">
                         
-                        <span class="card-title">Tensorflow学习日志（二）：变量初始化</span>
+                        <span class="card-title">Tensorflow2.0 学习日志（二）：进阶操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">介绍接下来我们会介绍如何创建和初始化TensorFlow变量
-创建变量import tensorflow
-from tensorflow.python.framework import ops
-
-#创建三个变量
-weights = tf.V</div>
+                    <div class="summary">合并合并操作为把两个张良的数据合并为一个张量，有两种操作可以合并，拼接和堆叠，拼接不改变张量的维度，在某一个维度上合并两个张量，堆叠会创建一个新的维度来保存数据。
+拼接在 TensorFlow 中，可以通过 tf.concat(tensor</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-09
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
                             </span>
                         <span class="publish-author">
                             
@@ -644,20 +632,24 @@ weights = tf.V</div>
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/09/Tensorflow%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9ASession%E5%92%8CTensorBoard%E5%8F%AF%E8%A7%86%E5%8C%96/">
+                <a href="/2020/03/11/Tensorflow2-1-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Tensorflow学习日志（一）：Session和TensorBoard可视化">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Tensorflow2.1 学习日志（一）：基本操作">
                         
-                        <span class="card-title">Tensorflow学习日志（一）：Session和TensorBoard可视化</span>
+                        <span class="card-title">Tensorflow2.1 学习日志（一）：基本操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">计算图是TensorFlow的核心概念，使用图（Graph）来表示计算任务，为了执行图的计算，图必须在会话（Session）里面启动，会话将图的操作分发到CPU、GPU等设备上执行，下面将介绍如何在TensorFlow里面创建计算图，运行计</div>
+                    <div class="summary">创建标量In [1]:
+a = 1.2 # python 语言方式创建标量 
+aa = tf.constant(1.2)  # TF 方式创建标量 
+type(a), type(aa), tf.is_tensor(aa)
+Out[1]: (</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-09
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
                             </span>
                         <span class="publish-author">
                             
@@ -674,8 +666,8 @@ weights = tf.V</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/TensorFlow/" target="_blank">
-                        <span class="chip bg-color">TensorFlow</span>
+                    <a href="/tags/Tensorflow/" target="_blank">
+                        <span class="chip bg-color">Tensorflow</span>
                     </a>
                     
                 </div>
@@ -749,7 +741,7 @@ weights = tf.V</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">1.7k</span>
+                <span class="white-color">2.5k</span>
             
 
             
