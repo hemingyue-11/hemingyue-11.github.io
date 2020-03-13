@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Tensorflow2.0 学习日志（二）：进阶操作, Infinity">
-    <meta name="description" content="合并合并操作为把两个张良的数据合并为一个张量，有两种操作可以合并，拼接和堆叠，拼接不改变张量的维度，在某一个维度上合并两个张量，堆叠会创建一个新的维度来保存数据。
-拼接在 TensorFlow 中，可以通过 tf.concat(tensor">
+    <meta name="keywords" content="Tensorflow2.0 学习日志（四）：填充，复制，限幅, Infinity">
+    <meta name="description" content="填充
+对于图片数据的高和宽、序列信号的长度，维度长度可能各不相同。为了方便网络的 并行计算，需要将不同长度的数据扩张为相同长度，之前我们介绍了通过复制的方式可以 增加数据的长度，但是重复复制数据会破坏原有的数据结构，并不适合于此处。通常的做">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Tensorflow2.0 学习日志（二）：进阶操作 | Infinity</title>
+    <title>Tensorflow2.0 学习日志（四）：填充，复制，限幅 | Infinity</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -244,13 +244,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Tensorflow2.0 学习日志（二）：进阶操作
+                        Tensorflow2.0 学习日志（四）：填充，复制，限幅
                     </div>
                 </div>
             </div>
@@ -366,14 +366,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-11
+                    2020-03-13
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        628
+                        648
                     </div>
                     
 
@@ -391,27 +391,40 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><p>合并操作为把两个张良的数据合并为一个张量，有两种操作可以合并，拼接和堆叠，拼接不改变张量的维度，在某一个维度上合并两个张量，堆叠会创建一个新的维度来保存数据。</p>
-<h3 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h3><p>在 TensorFlow 中，可以通过 tf.concat(tensors, axis)函数拼接张量，其中参数 tensors 保存了所有需要合并的张量 List，axis 参数指定需要合并的维度索引。回到上面的 例子，我们在班级维度上合并成绩册，这<br>里班级维度索引号为 0，即 axis=0，合并张量𝑨和 𝑩的代码如下：</p>
-<pre class="line-numbers language-python"><code class="language-python">a <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 模拟成绩册 A</span>
-b <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 模拟成绩册 B</span>
-tf<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span>b<span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 拼接合并成绩册</span>
-Out<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">13</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">35</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>float32<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="堆叠"><a href="#堆叠" class="headerlink" title="堆叠"></a>堆叠</h3><p>拼接操作直接在现有维度上合并数据，并不会创建新的维度。如果在合并数据 时，希望创建一个新的维度，则需要使用 tf.stack 操作。考虑张量𝑨保存了某个班级的成绩 册，shape 为[35,8]，张量𝑩保存了另一个班级&gt;的成绩册，shape 为[35,8]。合并这 2 个班级 的数据时，则需要创建一个新维度，定义为班级维度，新维度可以选择放置在任意位置， 一般根据大小维度的经验法则，将较大概念的班级维度放置在学生维度之前，则合<br>并后的 张量的新 shape 应为[2,35,8]。</p>
-<pre class="line-numbers language-python"><code class="language-python">a <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-b <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-tf<span class="token punctuation">.</span>stack<span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span>b<span class="token punctuation">]</span><span class="token punctuation">,</span>axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 堆叠合并为 2 个班级，班级维度插入在最前</span>
-Out<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">55</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">35</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>float32<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h2><p>合并操作的逆过程就是分割，将一个张量分拆为多个张量。<br>通过tf.split(x,num_or_size_splits,axis)可以完成张量的分割操作。<br> x 参数：待分割张量。<br> num_or_size_splits 参数：切割方案。当 num_or_size_splits 为单个数值时，如 10，表 示等长切割为 10 份；当 num_or_size_splits 为 List 时，List 的每个元素表示每份的长 度，如[2,4,2,2]表示切割为 4 &gt;份，每份的长度依次是 2、4、2、2。<br> axis 参数：指定分割的维度索引号。</p>
-<pre class="line-numbers language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-x <span class="token operator">=</span> tf<span class="token punctuation">.</span>random<span class="token punctuation">.</span>normal<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">35</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 等长切割为 10 份</span>
-result <span class="token operator">=</span> tf<span class="token punctuation">.</span>split<span class="token punctuation">(</span>x<span class="token punctuation">,</span> num_or_size_splits<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-len<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 返回的列表为 10 个张量的列表</span>
-Out<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h2><hr>
+<p>对于图片数据的高和宽、序列信号的长度，维度长度可能各不相同。为了方便网络的 并行计算，需要将不同长度的数据扩张为相同长度，之前我们介绍了通过复制的方式可以 增加数据的长度，但是重复复制数据会破坏原有的数据结构，并不适合于此处。通常的做 法是，在需要补充长度的数据开始或结束处填充足够数量的特定数值，这些特定数值一般 代表了无效意义，例如 0，使得填充后的长度满足系统要求。那么这种操作就叫作填充 (Padding)。<br>填充操作可以通过 tf.pad(x, paddings)函数实现，参数 paddings 是包含了多个 [Left Padding,Right Padding]的嵌套方案 List，如[[0,0],[2,1],[1,2]]表示第一个维度不填 充，第二个维度左边(起始处)填充两个单元，右边(结束处)填充一个单元，第三个维度左边 填充一个单元，右边填充两个单元。考虑上述 2 个句子的例子，需要在第二个句子的第一 个维度的右边填充 2 个单元，则 paddings 方案为[[0,2]]：</p>
+<pre class="line-numbers language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+a <span class="token operator">=</span> tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 第一个句子</span>
+b <span class="token operator">=</span> tf<span class="token punctuation">.</span>constant<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 第二个句子</span>
+b <span class="token operator">=</span> tf<span class="token punctuation">.</span>pad<span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 句子末尾填充 2 个 0</span>
+b <span class="token comment" spellcheck="true"># 填充后的结果</span>
+Out<span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>int32<span class="token punctuation">,</span> numpy<span class="token operator">=</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h2><p>通过 tf.tile 函数可以在任意维度将数据重复复制多份，如 shape 为[4,32,32,3]的数据， 复制方案为 multiples=[2,3,3,1]，即通道数据不复制，高和宽方向分别复制 2 份，图片数再复制 1 份。</p>
+<h2 id="数据限幅"><a href="#数据限幅" class="headerlink" title="数据限幅"></a>数据限幅</h2><h3 id="数据上限幅"><a href="#数据上限幅" class="headerlink" title="数据上限幅"></a>数据上限幅</h3><p>通过tf.minimum(x, a)可以实现数据的上限幅，即x∈（-∞，a],</p>
+<pre class="line-numbers language-python"><code class="language-python">
+In <span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+x <span class="token operator">=</span> tf<span class="token punctuation">.</span>range<span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span>
+tf<span class="token punctuation">.</span>minimum<span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 上限幅到 7</span>
+Out<span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">48</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>int32<span class="token punctuation">,</span> numpy<span class="token operator">=</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span>，<span class="token number">1</span>，<span class="token number">2</span>，<span class="token number">3</span>，<span class="token number">4</span>，<span class="token number">5</span>，<span class="token number">6</span>，<span class="token number">7</span>，<span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据下限幅"><a href="#数据下限幅" class="headerlink" title="数据下限幅"></a>数据下限幅</h3><p>通过tf.maximum(x, a)可以&gt;实现数据的上限幅，即x∈[a,+∞),</p>
+<pre class="line-numbers language-python"><code class="language-python">
+In <span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+x <span class="token operator">=</span> tf<span class="token punctuation">.</span>range<span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span>
+tf<span class="token punctuation">.</span>maximum<span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 下限幅>到 2</span>
+Out<span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">48</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>int32<span class="token punctuation">,</span> numpy<span class="token operator">=</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="上下限幅"><a href="#上下限幅" class="headerlink" title="上下限幅"></a>上下限幅</h3><p>我们可以使用 tf.clip_by_value 函数实现上下限幅</p>
+<pre class="line-numbers language-python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">36</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+x <span class="token operator">=</span> tf<span class="token punctuation">.</span>range<span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span>
+tf<span class="token punctuation">.</span>clip_by_value<span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 限幅为 2~7</span>
+Out<span class="token punctuation">[</span><span class="token number">36</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+<span class="token operator">&lt;</span>tf<span class="token punctuation">.</span>Tensor<span class="token punctuation">:</span> id<span class="token operator">=</span><span class="token number">66</span><span class="token punctuation">,</span> shape<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>int32<span class="token punctuation">,</span> numpy<span class="token operator">=</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">></span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -559,7 +572,7 @@ Out<span class="token punctuation">[</span><span class="token number">8</span><s
                     </span>
                     <a href="http://yoursite.com" class="b-link-green">Infinity</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2020/03/11/Tensorflow2-0-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C/" class="b-link-green">Tensorflow2.0 学习日志（二）：进阶操作</a>
+                    <a href="/2020/03/13/Tensorflow2%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9A%E5%A1%AB%E5%85%85%E5%92%8C%E5%A4%8D%E5%88%B6/" class="b-link-green">Tensorflow2.0 学习日志（四）：填充，复制，限幅</a>
                 </p>
             </div>
         </div>
@@ -584,18 +597,21 @@ Out<span class="token punctuation">[</span><span class="token number">8</span><s
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/13/Tensorflow2%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/">
+                <a href="/2020/03/13/Tensorflow2%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Tensorflow2.0 学习日志（三）：数据统计">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Tensorflow2.0 学习日志（五）：高级操作">
                         
-                        <span class="card-title">Tensorflow2.0 学习日志（三）：数据统计</span>
+                        <span class="card-title">Tensorflow2.0 学习日志（五）：高级操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">在神经网络的计算过程中，经常需要统计数据的各种属性，如最值、最值位置、均值、范数等信息。由于张量通常较大，直接观察数据很难获得有用信息，通过获取这些张量的统计信息可以较轻松地推测张量数值的分布。
-向量范数在 TensorFlow 中，可以通</div>
+                    <div class="summary">tf.gathertf.gather 可以收集某一维度特定索引的数据
+In [38]:
+tf.gather(x,[0,1],axis=0)# 在班级维度收集第 1~2 号班级成绩册
+Out[38]:
+&lt;tf.Tensor: id=83</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-13
@@ -630,24 +646,21 @@ Out<span class="token punctuation">[</span><span class="token number">8</span><s
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/11/Tensorflow2-1-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+                <a href="/2020/03/13/Tensorflow2%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Tensorflow2.1 学习日志（一）：基本操作">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Tensorflow2.0 学习日志（三）：数据统计">
                         
-                        <span class="card-title">Tensorflow2.1 学习日志（一）：基本操作</span>
+                        <span class="card-title">Tensorflow2.0 学习日志（三）：数据统计</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">创建标量In [1]:
-a = 1.2 # python 语言方式创建标量 
-aa = tf.constant(1.2)  # TF 方式创建标量 
-type(a), type(aa), tf.is_tensor(aa)
-Out[1]: (</div>
+                    <div class="summary">在神经网络的计算过程中，经常需要统计数据的各种属性，如最值、最值位置、均值、范数等信息。由于张量通常较大，直接观察数据很难获得有用信息，通过获取这些张量的统计信息可以较轻松地推测张量数值的分布。
+向量范数在 TensorFlow 中，可以通</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-11
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-13
                             </span>
                         <span class="publish-author">
                             
